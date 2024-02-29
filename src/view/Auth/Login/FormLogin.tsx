@@ -4,40 +4,103 @@ import {
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Select, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../../core/redux/actions/userActionThunk";
+import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
+import { auth } from "../../../firebase/firebase";
+import { showModal } from "../../../core/redux/features/modalSuccess/modalSuccessSlice";
 
 const FormLogin = () => {
-  const [isSelectOpen, setIsSelectOpen] = useState(false);
-  const [isRecaptcha, setIsRecaptcha] = useState(false);
+  interface FormValuesType {
+    email: string;
+    password: string;
+    remember: boolean;
+    select: string;
+  }
 
+  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
+  const [isRecaptcha, setIsRecaptcha] = useState<boolean>(false);
+  const [saveEmail, setSaveEmail] = useState<string | null>(null);
+  const [savePassword, setSavePassword] = useState<string | null>(null);
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+
+  const { user, error } = useAppSelector((state) => state.user);
+  console.log(user);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { Option } = Select;
-  const onFinish = (values: any) => {
+  const onFinish = async (values: FormValuesType) => {
     console.log("Success:", values);
+    const { email, password, remember } = values;
+    dispatch(login({ email, password }));
+
+    if (remember) {
+      // Hash mật khẩu trước khi lưu vào localStorage
+      localStorage.setItem("savedEmail", email);
+      localStorage.setItem("savedPassword", password);
+    } else {
+      localStorage.removeItem("savedEmail");
+      localStorage.removeItem("savedPassword");
+    }
+
+    // Kiêm tra đăng nhập thành công thì hiện Modal
+    if (auth.currentUser) {
+      dispatch(
+        showModal({
+          title: "Đăng nhập thành công",
+          button: "Tới trang tuyển dụng",
+          titleSecond: "Bạn đã đăng nhập thành công!",
+          navigate: "/",
+        }),
+      );
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    const getSaveEmail = localStorage.getItem("savedEmail");
+    const getSavePassword = localStorage.getItem("savedPassword");
+
+    // Kiếm tra trạng thái của email và password trên storage nếu tồn tại thì lưu vào state
+    if (getSaveEmail) {
+      setSaveEmail(getSaveEmail);
+    } else {
+      setSaveEmail(null);
+    }
+
+    if (getSavePassword) {
+      setSavePassword(getSavePassword);
+    } else {
+      setSavePassword(null);
+    }
+    setIsDataLoaded(true);
+  }, [saveEmail, savePassword, setSaveEmail, setSavePassword]);
+
+  if (!isDataLoaded) {
+    return null;
+  }
+
   type FieldType = {
+    select?: string;
     email?: string;
     password?: string;
-    remember?: boolean;
+    remember?: boolean | undefined;
   };
   return (
     <div className="h-[452px] w-[524px] pt-4">
       <Form
         name="basic"
-        initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout="vertical"
       >
-        <Form.Item
+        <Form.Item<FieldType>
           name="select"
           label="Vai trò"
           rules={[{ required: true, message: "Vui lòng chọn vai trò" }]}
@@ -64,8 +127,11 @@ const FormLogin = () => {
         <Form.Item<FieldType>
           label="Email"
           name="email"
-          rules={[{ required: true, message: "Vui lòng nhập email" }]}
+          rules={[
+            { required: true, message: "Vui lòng nhập email", type: "email" },
+          ]}
           className="= font-semibold"
+          initialValue={!!saveEmail ? saveEmail : ""}
         >
           <Input
             className="h-[48px]"
@@ -77,8 +143,11 @@ const FormLogin = () => {
         <Form.Item<FieldType>
           label="Mật khẩu"
           name="password"
-          rules={[{ required: true, message: "Vui lòng nhập mật khẩu" }]}
+          rules={[
+            { required: true, message: "Vui lòng nhập mật khẩu", min: 6 },
+          ]}
           className="= font-semibold"
+          initialValue={savePassword}
         >
           <Input.Password
             className="h-[48px]"
@@ -87,14 +156,20 @@ const FormLogin = () => {
           />
         </Form.Item>
 
-        <p className="text-red-warning font-body h-[22px] w-[254px] text-[16px] leading-[21.79px]">
-          <ExclamationCircleOutlined className="h-[4px]" /> Sai tên đăng nhập
-          hoặc mật khẩu.
-        </p>
+        {!!error && (
+          <p className="h-[22px] w-[254px] font-body text-[16px] leading-[21.79px] text-red-warning">
+            <ExclamationCircleOutlined className="h-[4px]" /> Sai tên đăng nhập
+            hoặc mật khẩu.
+          </p>
+        )}
 
         <div className="flex items-center justify-between">
-          <Form.Item<FieldType> name="remember">
-            <Checkbox checked>Ghi nhớ mật khẩu</Checkbox>
+          <Form.Item<FieldType>
+            name="remember"
+            valuePropName="checked"
+            initialValue={true}
+          >
+            <Checkbox>Ghi nhớ mật khẩu</Checkbox>
           </Form.Item>
 
           <Typography.Text

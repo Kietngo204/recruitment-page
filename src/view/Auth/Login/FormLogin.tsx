@@ -175,7 +175,7 @@ const FormLogin = () => {
           <Typography.Text
             className="cursor-pointer text-orange-alta underline"
             onClick={() => {
-              navigate("/login/forgot-password");
+              navigate("/auth/forgot-password");
             }}
           >
             Quên mật khẩu?

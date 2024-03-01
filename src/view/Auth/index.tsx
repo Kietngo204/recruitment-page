@@ -8,7 +8,7 @@ import { auth } from "../../firebase/firebase";
 import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
 import { logout } from "../../core/redux/actions/userActionThunk";
 
-const LoginLayout = () => {
+const AuthLayout = () => {
   const dispatch = useAppDispatch();
 
   const { user } = useAppSelector((state) => state.user);
@@ -44,4 +44,4 @@ const LoginLayout = () => {
   );
 };
 
-export default LoginLayout;
+export default AuthLayout;

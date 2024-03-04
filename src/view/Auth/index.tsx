@@ -1,28 +1,28 @@
-import { Outlet } from "react-router-dom";
-import Logo from "./components/Logo";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import Logo from "../../shared/components/Logo";
 import TitleAuth from "./components/BgAuth/TitleAuth";
 import JoinUs from "./components/BgAuth/JoinUs";
 import ModalSuccess from "./components/ModalSuccess";
 import { auth } from "../../firebase/firebase";
 
-import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
-import { logout } from "../../core/redux/actions/userActionThunk";
+import { useAppSelector } from "../../core/redux/hooks";
 
 const AuthLayout = () => {
-  const dispatch = useAppDispatch();
+  const location = useLocation();
+  console.log(location);
 
   const { user } = useAppSelector((state) => state.user);
-
-  const handleSignOut = () => {
-    dispatch(logout());
-  };
 
   console.log(user);
 
   console.log(auth.currentUser);
+
+  if (location.pathname == "/auth") {
+    return <Navigate to={"/"} replace />;
+  }
   return (
     <div className="relative h-[100dvh] bg-[#F1F3F5]">
-      <Logo />
+      <Logo absolute={true} left="315px" top="54px" />
 
       <Outlet />
 
@@ -31,15 +31,6 @@ const AuthLayout = () => {
       <JoinUs />
 
       <ModalSuccess />
-
-      <button
-        className="absolute top-1 z-50 block"
-        onClick={() => {
-          handleSignOut();
-        }}
-      >
-        Sign out
-      </button>
     </div>
   );
 };

@@ -45,6 +45,7 @@ const ModalSuccess = () => {
           type="primary"
           onClick={() => {
             navigate(link);
+            handleCancelModal();
           }}
         >
           {button}

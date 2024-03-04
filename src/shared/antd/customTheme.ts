@@ -18,4 +18,5 @@ export const theme = {
     },
     Checkbox: { colorPrimary: "#f26d21", algorithm: true },
   },
+  cssVar: true,
 };

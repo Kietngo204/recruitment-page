@@ -1,0 +1,10 @@
+.selectOption {
+  /* Thêm các style của bạn ở đây */
+  transition: all 0.5s;
+}
+
+/* Style khi hover vào option */
+.selectOption:hover {
+  /* Thêm các style của bạn khi hover vào option ở đây */
+  color: #f26d21;
+}

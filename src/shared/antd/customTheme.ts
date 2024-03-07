@@ -12,6 +12,7 @@ export const theme = {
     Select: {
       colorPrimary: "#f26d21",
       algorithm: true,
+      colorTextPlaceholder: "#666666",
     },
     Form: {
       marginLG: 10,

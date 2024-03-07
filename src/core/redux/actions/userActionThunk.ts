@@ -18,12 +18,8 @@ export const login = createAsyncThunk(
 
 // Action creator async để đăng xuất
 export const logout = createAsyncThunk("auth/logout", async () => {
-  try {
-    const response = await signOut(auth);
-    return response;
-  } catch (error) {
-    return error;
-  }
+  const response = await signOut(auth);
+  return response;
 });
 
 // Action creator async theo dỗi trạng thái login và logout của user

@@ -4,7 +4,7 @@ import Study from "./Study";
 const Header = () => {
   return (
     <div className="bg-white">
-      <div className="container mx-auto py-[25px]">
+      <div className="container mx-auto px-24 py-[25px]">
         <div className="flex items-center justify-between">
           <Logo />
 

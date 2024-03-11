@@ -1,8 +1,8 @@
 import { Avatar, Button, Dropdown, MenuProps, Space } from "antd";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
-import { logout } from "../../core/redux/actions/userActionThunk";
-import { auth } from "../../firebase/firebase";
+import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
+import { logout } from "../../../core/redux/actions/userActionThunk";
+import { auth } from "../../../firebase/firebase";
 
 const Account: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -46,7 +46,7 @@ const Account: React.FC = () => {
             src={
               !!photoURL
                 ? photoURL
-                : "https://s3-alpha-sig.figma.com/img/8db6/4dfb/0f4c9030e92a943d2df0e63726f913f9?Expires=1710115200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=aZQ-XCyYR0MsZ9peIJXVQaTJYwOH8ftykVThGcccYgj6e5ZG1-l6itF4DTg3wVGvKMp7jbrNud87Yq7on9BMceivqGc3kfJ5F~iw98y2m~tK9rJCWsBxH6AdlVt18y75stq-PiQvNhVwEJESZGX8tJXWVGVoYx-4YJ-EQniWJgCH9AjQPGUtcuYWS32TnGTSFPXNclNKavZzk9FFMsHmpQAgNbnJGsLPDclkm~JepbPnD0CvYOUkPmoUKVY6uG944uo5crbZDgO1uu2A40BOTHtIi8KxLaSfwqmSFbFCN0Vk0CzTESxYwha84XSgzIYD~ZzSvaIzhA81dRhvlC-aIQ__"
+                : "https://s3-alpha-sig.figma.com/img/8db6/4dfb/0f4c9030e92a943d2df0e63726f913f9?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IJ2Wcdz3ALHMrhfdZMjtB6yTCineq-eLPeJ2k3o6LkJjrMkLkrkrvwc~vliK-eNhHG6XEb91IFK9QU6vcJp3gCu8-bdrlvdgwkYx~WuUq4souLAJ-5XhSmRCFKOmO3xZ2hD8Igjv6~vNVlmjouVtdP692GHX4un~d-G9Z0EoZXlPHqauF8trv9ckXyieKj0RSYD305ljp8RZcASAPmYNYqWosUcNNoco1sm0Q2G0fpDsCkSBgUfjf5MlHcDi3xFYtYkmS9Z8PCB2ROyynqhELQ2R9oOd3JIoMG4Xn4QAF9q3bW3h027BbkR6QhiDz~3-kk7~8uwmui~i0T0jIPNQlQ__"
             }
             size={34}
           />

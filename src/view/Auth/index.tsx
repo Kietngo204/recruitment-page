@@ -5,24 +5,38 @@ import JoinUs from "./components/BgAuth/JoinUs";
 import ModalSuccess from "./components/ModalSuccess";
 import { auth } from "../../firebase/firebase";
 
-import { useAppSelector } from "../../core/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
+import { useEffect } from "react";
+import { getImages } from "../../core/redux/actions/imagesActionThunk";
+import Loading from "../../shared/components/Loading";
 
 const AuthLayout = () => {
-  const location = useLocation();
-  console.log(location);
-
   const { user } = useAppSelector((state) => state.user);
 
   console.log(user);
 
   console.log(auth.currentUser);
 
+  const dispatch = useAppDispatch();
+
+  const { images } = useAppSelector((state) => state.images);
+
+  console.log("images:", images);
+
+  useEffect(() => {
+    dispatch(getImages());
+  }, []);
+
+  if (!images) {
+    return <Loading />;
+  }
+
   if (location.pathname == "/auth") {
     return <Navigate to={"/"} replace />;
   }
   return (
     <div className="relative h-[100dvh] bg-[#F1F3F5]">
-      <Logo absolute={true} left="315px" top="54px" />
+      <Logo absolute="absolute" left="left-[315px]" top="top-[54px]" />
 
       <Outlet />
 

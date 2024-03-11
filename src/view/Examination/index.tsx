@@ -2,17 +2,16 @@ import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 import { Button, Form, Select } from "antd";
 import { useState } from "react";
 import styles from "./examStyle.module.css";
-import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
-import { onSetSubject } from "../../../core/redux/features/exam/examSlice";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useAppDispatch } from "../../core/redux/hooks";
+import { onSetSubject } from "../../core/redux/features/exam/examSlice";
+import { useNavigate } from "react-router-dom";
+import Hello from "../../shared/components/Hello";
 
 const Examination = () => {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
 
-  const { subject } = useAppSelector((state) => state.exam);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log(subject);
 
   const onFinish = async (values: any) => {
     console.log("Success:", values);
@@ -21,28 +20,17 @@ const Examination = () => {
     navigate(`/test/${values.select}`);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   type FieldType = {
     select?: string;
-    email?: string;
-    password?: string;
-    remember?: boolean | undefined;
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h2 className="text-center text-[32px] font-bold text-[#494949]">
-        Xin chào{" "}
-        <span className="uppercase text-orange-alta">thái trung kiên</span>
-      </h2>
+      <Hello />
 
       <Form
         name="basic"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout="inline"
         className="mt-4 w-[852px] justify-between rounded-xl bg-white p-1"

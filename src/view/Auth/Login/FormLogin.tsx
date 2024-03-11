@@ -52,7 +52,7 @@ const FormLogin = () => {
           title: "Đăng nhập thành công",
           button: "Tới trang tuyển dụng",
           titleSecond: "Bạn đã đăng nhập thành công!",
-          navigate: "/",
+          navigate: "/test",
         }),
       );
     }

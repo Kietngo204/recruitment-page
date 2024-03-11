@@ -15,5 +15,11 @@ export const homeTheme = {
     Button: {
       colorLink: "#f26d21",
     },
+    Input: {
+      colorBorder: "#fff",
+      colorPrimaryHover: "#fff",
+      activeBorderColor: "#fff",
+      activeShadow: "#fff",
+    },
   },
 };

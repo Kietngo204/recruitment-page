@@ -1,5 +1,9 @@
+import { Image } from "antd";
+import { useAppSelector } from "../../../core/redux/hooks";
+import { Link } from "react-router-dom";
+
 interface LogoProps {
-  absolute?: boolean;
+  absolute?: string;
   left?: string;
   top?: string;
   right?: string;
@@ -7,21 +11,19 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = (props) => {
-  const { absolute = false, bottom, left, right, top } = props;
+  const { absolute = "", bottom = "", left = "", right = "", top = "" } = props;
 
-  const tailwindClasses = [
-    "h-[52px]",
-    "w-[373px]",
-    "bg-logo-alta",
-    "bg-cover",
-    absolute ? "absolute" : "",
-    left ? `left-[${left}]` : "",
-    top ? `top-[${top}]` : "",
-    right ? `right-[${right}]` : "",
-    bottom ? `bottom-[${bottom}]` : "",
-  ].join(" ");
+  const { images } = useAppSelector((state) => state.images);
 
-  return <div className={tailwindClasses}></div>;
+  return (
+    <div
+      className={`h-[52px] w-[373px] ${absolute} ${top} ${left} ${right} ${bottom}`}
+    >
+      <Link to={"/"}>
+        <Image src={images?.logo} alt="logo" preview={false} />
+      </Link>
+    </div>
+  );
 };
 
 export default Logo;

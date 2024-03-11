@@ -30,7 +30,7 @@ const ModalSuccess = () => {
       onCancel={handleCancelModal}
       footer={null}
       maskClosable={false}
-      className="absolute left-[50%] top-[50%] h-[270px] w-[470px] translate-x-[-50%] translate-y-[-50%]"
+      centered
     >
       <div className="flex flex-col items-center justify-center gap-6 px-16 py-10">
         <h3 className="text-[24px] font-bold leading-[28.13px] text-orange-alta">

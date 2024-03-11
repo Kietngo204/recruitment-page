@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/firebase";
-import { User, sendEmailVerification } from "firebase/auth";
+import { User, sendPasswordResetEmail } from "firebase/auth";
 
 const FormForgotPassword = () => {
   const navigate = useNavigate();
@@ -13,15 +13,13 @@ const FormForgotPassword = () => {
     const user: User | null = auth.currentUser;
     if (user) {
       // Nếu người dùng đã đăng nhập, gửi email xác thực
-      sendEmailVerification(user)
+      sendPasswordResetEmail(auth, values.email)
         .then(() => {
-          // Email verification sent!
-          // ...
-          console.log("Email verification sent!");
+          console.log("Email reset password sent!");
         })
         .catch((error) => {
           // Xử lý lỗi nếu có
-          console.error("Error sending email verification:", error);
+          console.error("Error sending email  reset password:", error);
         });
       navigate("/auth/reset-password");
     } else {

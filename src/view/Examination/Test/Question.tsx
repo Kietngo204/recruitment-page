@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import { useAppSelector } from "../../core/redux/hooks";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
-interface Question {
-  question: string;
-  options: string[];
-}
 const Question: React.FC<any> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const totalQuestions = 5; // Số câu hỏi trong bài trắc nghiệm
@@ -25,35 +20,9 @@ const Question: React.FC<any> = ({ questions }) => {
 
   const isLastQuestion = currentQuestion === totalQuestions;
   const isFirstQuestion = currentQuestion === 1;
-
-  // Định nghĩa các câu hỏi và các đáp án ở đây
-  //   const questions: any = [
-  //     {
-  //       question: "What is the capital of France?",
-  //       options: ["Paris", "London", "Rome", "Berlin"],
-  //     },
-  //     {
-  //       question: "What is the largest planet in our solar system?",
-  //       options: ["Jupiter", "Saturn", "Mars", "Earth"],
-  //     },
-  //     {
-  //       question: "How are you?",
-  //       options: ["Jupiter", "Saturn", "Mars", "Earth"],
-  //     },
-  //     {
-  //       question: "Where are you from?",
-  //       options: ["Jupiter", "Saturn", "Mars", "Earth"],
-  //     },
-  //     {
-  //       question: "Where are you going?",
-  //       options: ["Jupiter", "Saturn", "Mars", "Earth"],
-  //     },
-  //     // Thêm câu hỏi tiếp theo tương tự
-  //   ];
-  //   if (isLoading) {
-  //     return <div>Loading...</div>;
-  //   }
-
+  if (!questions) {
+    return <div>Loading...</div>;
+  }
   const renderOptions = (options: string[]): JSX.Element[] => {
     return options?.map((option, index) => (
       <div
@@ -77,13 +46,19 @@ const Question: React.FC<any> = ({ questions }) => {
       <div className="w-[633px] pt-6">
         {/* Hiển thị nội dung của câu hỏi dựa trên currentQuestion */}
         <div>
-          <div className="w-[241px]">
+          <div className="">
             <h3 className="text-[24px] font-semibold">
               Câu hỏi {currentQuestion}
             </h3>
-            <p className="text-[18px]">
+            {/* <p className="text-[18px]">
               {questions[currentQuestion - 1]?.question}
-            </p>
+            </p> */}
+            <p
+              className="text-[18px]"
+              dangerouslySetInnerHTML={{
+                __html: questions[currentQuestion - 1]?.question,
+              }}
+            />
           </div>
           {renderOptions(questions[currentQuestion - 1]?.options)}
         </div>

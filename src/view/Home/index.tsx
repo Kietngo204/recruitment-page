@@ -2,6 +2,7 @@ import { Image } from "antd";
 import { useAppSelector } from "../../core/redux/hooks";
 import SearchJob from "./SearchJob";
 import JobList from "../JobList";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   const { images } = useAppSelector((state) => state.images);
@@ -16,21 +17,23 @@ const Home = () => {
           <br />
           tại ngôi nhà mới
         </h1>
-        {!jobs && (
-          <p className="mt-2 text-center leading-[22.4px] text-[#6D6D6D]">
-            Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm
-            <br />
-            để tận dụng tối đa tìm kiếm của bạn
-          </p>
-        )}
       </div>
+      {/* {!jobs && (
+        <p className="mt-2 text-center leading-[22.4px] text-[#6D6D6D]">
+          Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm
+          <br />
+          để tận dụng tối đa tìm kiếm của bạn
+        </p>
+      )}
+
       {jobs ? (
         <JobList />
       ) : (
         <div className="mt-12 h-[400px] w-[639px]">
           <Image src={images?.background} alt="background" preview={false} />
         </div>
-      )}
+      )} */}
+      <Outlet />
     </div>
   );
 };

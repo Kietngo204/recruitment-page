@@ -1,3 +1,3 @@
-export interface QuizProps {
-  currentPath: string;
+export interface CurrentPathProps {
+  currentPath?: string;
 }

@@ -12,6 +12,9 @@ import Page404 from "./view/Page404";
 import Examination from "./view/Examination";
 import ReportProcess from "./view/Examination/ReportProcess";
 import ProtectedRoute from "./routers/ProtectedRoute";
+import InfoRegister from "./view/InfoRegister";
+import NotFoundJob from "./view/Home/NotFoundJob";
+import JobList from "./view/JobList";
 
 function App() {
   return (
@@ -19,7 +22,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
+            <Route path="/" element={<Home />}>
+              <Route index element={<NotFoundJob />} />
+              <Route path="/job-list" element={<JobList />} />
+            </Route>
+            <Route path="/info-register" element={<InfoRegister />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/test" element={<Examination />} />
               <Route path="/test/:subj" element={<Test />} />

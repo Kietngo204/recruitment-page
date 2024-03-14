@@ -4,9 +4,10 @@ import { JopItemType } from "./interface";
 import JobItem from "./JobItem";
 import { useAppSelector } from "../../core/redux/hooks";
 import Loading from "../../shared/components/Loading";
+import { Navigate } from "react-router-dom";
 
 const JobList = () => {
-  const { jobs } = useAppSelector((state) => state.jobs);
+  const { jobs, isLoading } = useAppSelector((state) => state.jobs);
   console.log(jobs);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const jobsPerPage = 9;
@@ -19,8 +20,12 @@ const JobList = () => {
     setCurrentPage(page);
   };
 
-  if (!jobs) {
-    return <Loading />;
+  // if (jobs) {
+  //   return <Navigate to={"/"} replace />;
+  // }
+
+  if (isLoading) {
+    return <Loading isLoading={isLoading} />;
   }
   return (
     <div className="flex flex-col items-center justify-center">

@@ -1,0 +1,46 @@
+.ant-picker-dropdown .ant-picker-header {
+  color: #f26d21;
+  border-color: #f26d21;
+  padding: 8px 24px;
+  font-size: 16px;
+}
+.ant-picker-dropdown .ant-picker-header button {
+  color: #f26d21;
+}
+
+.ant-picker-dropdown .ant-picker-header button:hover {
+  color: #f58a4d;
+}
+
+:where(.css-dev-only-do-not-override-1kna4en).ant-picker-dropdown
+  .ant-picker-content
+  thead
+  tr
+  th {
+  color: #f26d21;
+  font-weight: bold;
+}
+
+.ant-picker-panel-layout > div {
+  width: 300px;
+}
+
+.ant-picker-date-panel {
+  width: 100% !important;
+}
+
+.ant-picker-dropdown .ant-picker-ranges {
+  display: none;
+}
+
+.ant-picker-dropdown .ant-picker-cell {
+  padding: 0;
+}
+
+.ant-picker .ant-picker-input {
+  flex-direction: row-reverse;
+}
+
+.ant-picker:hover .ant-picker-suffix:not(:last-child) {
+  opacity: 1;
+}

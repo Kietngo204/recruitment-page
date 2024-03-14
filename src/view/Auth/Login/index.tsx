@@ -8,7 +8,7 @@ const Login = () => {
   const [searchParams] = useSearchParams();
   if (user) {
     const redirectTo = searchParams.get("redirectTo");
-    return <Navigate to="/" replace />;
+    return <Navigate to={redirectTo || "/"} replace />;
   }
   return (
     <div className="absolute left-[315px] top-[202px]">

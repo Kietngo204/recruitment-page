@@ -1,18 +1,27 @@
 import { Button, Form, Input, Select } from "antd";
 import { CaretDownOutlined, SearchOutlined } from "@ant-design/icons";
 import styles from "../../Examination/examStyle.module.css";
-import { useAppDispatch } from "../../../core/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
 import { getJobs } from "../../../core/redux/actions/jobsActionThunk";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SearchJob = () => {
   const dispatch = useAppDispatch();
-
-  const onFinish = async (values: any) => {
+  const navigate = useNavigate();
+  const { jobs } = useAppSelector((state) => state.jobs);
+  const onFinish = (values: any) => {
     console.log("Success:", values);
     dispatch(getJobs());
-    // navigate("/job");
   };
 
+  useEffect(() => {
+    if (jobs) {
+      navigate("/job-list");
+    } else {
+      navigate("/");
+    }
+  }, [jobs]);
   type FieldType = {
     search?: string;
     specialize?: string;

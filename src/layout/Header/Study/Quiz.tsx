@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { QuizProps } from "./StudyTypes";
+import { CurrentPathProps } from "./StudyTypes";
 
-const Quiz: React.FC<QuizProps> = ({ currentPath }) => {
+const Quiz: React.FC<CurrentPathProps> = ({ currentPath }) => {
   const navigate = useNavigate();
 
-  const isQuizActive = currentPath.startsWith("/test");
+  const isQuizActive = currentPath?.startsWith("/test");
 
   return (
     <div
       className="flex h-[40px] w-[174px] cursor-pointer items-center justify-between"
       onClick={() => {
-        navigate("test");
+        navigate("/test");
       }}
     >
       <svg

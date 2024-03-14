@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { QuizProps } from "./StudyTypes";
+import { CurrentPathProps } from "./StudyTypes";
 
-const LearnProcess: React.FC<QuizProps> = ({ currentPath }) => {
+const LearnProcess: React.FC<CurrentPathProps> = ({ currentPath }) => {
   const navigate = useNavigate();
-  const isLearnProcessActive = currentPath.startsWith("/learnProcess");
+  const isLearnProcessActive = currentPath?.startsWith("/learnProcess");
   return (
     <div
       className="flex cursor-pointer items-center justify-between px-6"

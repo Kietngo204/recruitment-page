@@ -2,11 +2,9 @@ import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { useAppSelector } from "../../../core/redux/hooks";
 
 const FormForgotPassword = () => {
   const navigate = useNavigate();
-  const { user } = useAppSelector((state) => state.user);
   const onFinish = (values: any) => {
     // Nếu người dùng đã đăng nhập, gửi email xác thực
     sendPasswordResetEmail(auth, values.email)

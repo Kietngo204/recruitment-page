@@ -21,5 +21,13 @@ export const homeTheme = {
       activeBorderColor: "#fff",
       activeShadow: "#fff",
     },
+    Pagination: {
+      colorPrimary: "#fff",
+      colorPrimaryHover: "#fff",
+      colorBgTextActive: "#fff",
+      borderRadius: 50,
+      fontWeightStrong: 400,
+      itemActiveBg: "#f26d21",
+    },
   },
 };

@@ -4,6 +4,7 @@ import ExamInfo from "./ExamInfo";
 import Question from "./Question";
 import { useEffect } from "react";
 import { getQuestion } from "../../../core/redux/actions/examActionThunk";
+import Loading from "../../../shared/components/Loading";
 
 const Test = () => {
   const { subj } = useParams();
@@ -18,7 +19,11 @@ const Test = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (

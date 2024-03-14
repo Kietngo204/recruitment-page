@@ -1,12 +1,11 @@
 import { Avatar, Button, Dropdown, MenuProps, Space } from "antd";
-import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
+import { Link, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../../core/redux/hooks";
 import { logout } from "../../../core/redux/actions/userActionThunk";
 import { auth } from "../../../firebase/firebase";
 
 const Account: React.FC = () => {
-  const { user } = useAppSelector((state) => state.user);
-  console.log(auth.currentUser);
+  const location = useLocation();
   const currentUser = auth.currentUser;
   const displayName = currentUser?.displayName;
   const photoURL = currentUser?.photoURL;
@@ -23,7 +22,7 @@ const Account: React.FC = () => {
     {
       label: (
         <Link
-          to=""
+          to={location.pathname}
           onClick={() => {
             dispatch(logout());
           }}

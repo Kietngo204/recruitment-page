@@ -11,15 +11,27 @@ interface Credentials {
 export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }: Credentials) => {
-    await signInWithEmailAndPassword(auth, email, password);
-    return auth.currentUser?.uid;
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const user = response.user;
+      const currentUser = user.providerData.map((profile) => {
+        return profile;
+      });
+      return currentUser[0];
+    } catch (error) {
+      throw error;
+    }
   },
 );
 
 // Action creator async để đăng xuất
 export const logout = createAsyncThunk("auth/logout", async () => {
-  const response = await signOut(auth);
-  return response;
+  try {
+    const response = await signOut(auth);
+    return response;
+  } catch (error) {
+    throw error;
+  }
 });
 
 // Action creator async theo dỗi trạng thái login và logout của user

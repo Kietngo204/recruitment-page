@@ -11,29 +11,18 @@ import { getImages } from "../../core/redux/actions/imagesActionThunk";
 import Loading from "../../shared/components/Loading";
 
 const AuthLayout = () => {
-  const { user } = useAppSelector((state) => state.user);
-
-  console.log(user);
-
-  console.log(auth.currentUser);
-
   const dispatch = useAppDispatch();
 
   const { images } = useAppSelector((state) => state.images);
-
-  console.log("images:", images);
 
   useEffect(() => {
     dispatch(getImages());
   }, []);
 
   if (!images) {
-    return <Loading />;
+    return <Loading fullscreen={true} />;
   }
 
-  if (location.pathname == "/auth") {
-    return <Navigate to={"/"} replace />;
-  }
   return (
     <div className="relative h-[100dvh] bg-[#F1F3F5]">
       <Logo absolute="absolute" left="left-[315px]" top="top-[54px]" />

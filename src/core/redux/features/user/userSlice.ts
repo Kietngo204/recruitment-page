@@ -2,16 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login, logout } from "../../actions/userActionThunk";
 
 interface UserState {
-  user: string | null;
+  id: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+  emailVerified: boolean;
+}
+
+interface UserInitialState {
+  user: UserState | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const currentUser = localStorage.getItem("currentUser");
-const user: string | null = currentUser ? JSON.parse(currentUser) : null;
+const user: UserState | null = currentUser ? JSON.parse(currentUser) : null;
 
-const initialState: UserState = {
-  user,
+const initialState: UserInitialState = {
+  user: user || null,
   isLoading: false,
   error: null,
 };
@@ -36,13 +44,16 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action: any) => {
+        console.log(action);
         state.isLoading = false;
         state.error = null;
+        state.user = action.payload;
         localStorage.setItem("currentUser", JSON.stringify(action.payload));
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error?.message ?? "Login error";
+        state.user = null;
       });
     builder
       .addCase(logout.pending, (state) => {
@@ -52,10 +63,12 @@ export const userSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
+        state.user = null;
         localStorage.removeItem("currentUser");
       })
       .addCase(logout.rejected, (state, action) => {
         state.isLoading = false;
+        state.user = null;
         state.error = action.error?.message ?? "Logout error";
       });
   },

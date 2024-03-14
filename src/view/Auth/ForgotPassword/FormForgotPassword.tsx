@@ -1,31 +1,23 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase/firebase";
-import { User, sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { useAppSelector } from "../../../core/redux/hooks";
 
 const FormForgotPassword = () => {
   const navigate = useNavigate();
-
+  const { user } = useAppSelector((state) => state.user);
   const onFinish = (values: any) => {
-    console.log("Success:", values);
-
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    const user: User | null = auth.currentUser;
-    if (user) {
-      // Nếu người dùng đã đăng nhập, gửi email xác thực
-      sendPasswordResetEmail(auth, values.email)
-        .then(() => {
-          console.log("Email reset password sent!");
-        })
-        .catch((error) => {
-          // Xử lý lỗi nếu có
-          console.error("Error sending email  reset password:", error);
-        });
-      navigate("/auth/reset-password");
-    } else {
-      // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
-      navigate("/login");
-    }
+    // Nếu người dùng đã đăng nhập, gửi email xác thực
+    sendPasswordResetEmail(auth, values.email)
+      .then(() => {
+        console.log("Email reset password sent!");
+        navigate("/auth/reset-password");
+      })
+      .catch((error) => {
+        // Xử lý lỗi nếu có
+        console.error("Error sending email  reset password:", error);
+      });
   };
   // Confirm the link is a sign-in with email link.
 

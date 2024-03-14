@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import { ConfigProvider, Spin } from "antd";
+import { ConfigProvider } from "antd";
 import { homeTheme } from "../../shared/antd/homeTheme";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
@@ -20,7 +20,7 @@ const MainLayout = () => {
   }, []);
 
   if (!images) {
-    return <Loading />;
+    return <Loading fullscreen={true} />;
   }
   return (
     <div>

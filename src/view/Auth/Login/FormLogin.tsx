@@ -9,8 +9,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../core/redux/actions/userActionThunk";
 import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
-import { auth } from "../../../firebase/firebase";
-import { showModal } from "../../../core/redux/features/modalSuccess/modalSuccessSlice";
 
 const FormLogin = () => {
   interface FormValuesType {
@@ -26,12 +24,12 @@ const FormLogin = () => {
   const [savePassword, setSavePassword] = useState<string | null>(null);
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
-  const { user, error } = useAppSelector((state) => state.user);
-  console.log(user);
+  const { error } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const { Option } = Select;
-  const onFinish = async (values: FormValuesType) => {
+  const onFinish = (values: FormValuesType) => {
     console.log("Success:", values);
     const { email, password, remember } = values;
     dispatch(login({ email, password }));
@@ -43,18 +41,6 @@ const FormLogin = () => {
     } else {
       localStorage.removeItem("savedEmail");
       localStorage.removeItem("savedPassword");
-    }
-
-    // Kiêm tra đăng nhập thành công thì hiện Modal
-    if (auth.currentUser) {
-      dispatch(
-        showModal({
-          title: "Đăng nhập thành công",
-          button: "Tới trang tuyển dụng",
-          titleSecond: "Bạn đã đăng nhập thành công!",
-          navigate: "/test",
-        }),
-      );
     }
   };
 

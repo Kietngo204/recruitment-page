@@ -1,11 +1,15 @@
 import { Spin } from "antd";
 
-const Loading = () => {
+interface LoadingState {
+  fullscreen?: boolean;
+}
+
+const Loading: React.FC<LoadingState> = ({ fullscreen = false }) => {
   return (
     <Spin
       tip="Loading"
       size="large"
-      fullscreen={true}
+      fullscreen={fullscreen}
       className="flex items-center justify-center"
     >
       <div className="content" />

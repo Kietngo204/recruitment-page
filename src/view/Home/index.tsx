@@ -1,9 +1,12 @@
 import { Image } from "antd";
 import { useAppSelector } from "../../core/redux/hooks";
 import SearchJob from "./SearchJob";
+import JobList from "../JobList";
 
 const Home = () => {
   const { images } = useAppSelector((state) => state.images);
+  const { jobs } = useAppSelector((state) => state.jobs);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <SearchJob />
@@ -13,15 +16,21 @@ const Home = () => {
           <br />
           tại ngôi nhà mới
         </h1>
-        <p className="mt-2 text-center leading-[22.4px] text-[#6D6D6D]">
-          Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm
-          <br />
-          để tận dụng tối đa tìm kiếm của bạn
-        </p>
+        {!jobs && (
+          <p className="mt-2 text-center leading-[22.4px] text-[#6D6D6D]">
+            Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm
+            <br />
+            để tận dụng tối đa tìm kiếm của bạn
+          </p>
+        )}
       </div>
-      <div className="mt-12 h-[400px] w-[639px]">
-        <Image src={images?.background} alt="background" preview={false} />
-      </div>
+      {jobs ? (
+        <JobList />
+      ) : (
+        <div className="mt-12 h-[400px] w-[639px]">
+          <Image src={images?.background} alt="background" preview={false} />
+        </div>
+      )}
     </div>
   );
 };

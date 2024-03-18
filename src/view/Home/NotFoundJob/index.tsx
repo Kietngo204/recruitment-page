@@ -4,13 +4,12 @@ import { useAppSelector } from "../../../core/redux/hooks";
 const NotFoundJob = () => {
   const { images } = useAppSelector((state) => state.images);
   return (
-    <div>
-      <p className="mt-2 text-center leading-[22.4px] text-[#6D6D6D]">
-        Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm
-        <br />
-        để tận dụng tối đa tìm kiếm của bạn
+    <div className="flex flex-col items-center">
+      <p className="mt-2 w-[255px] text-center text-sm text-[#6D6D6D] lg:w-[490px] lg:text-base">
+        Khi bạn đang tìm kiếm một công việc, có một số điều bạn có thể làm để
+        tận dụng tối đa tìm kiếm của bạn
       </p>
-      <div className="mt-12 h-[400px] w-[639px]">
+      <div className="mx-auto mt-12 h-[214.71px] w-[343px] sm:h-[307px] sm:w-[491px] lg:h-[400px] lg:w-[639px]">
         <Image src={images?.background} alt="background" preview={false} />
       </div>
     </div>

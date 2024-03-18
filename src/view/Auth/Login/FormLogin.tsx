@@ -78,7 +78,7 @@ const FormLogin = () => {
     remember?: boolean | undefined;
   };
   return (
-    <div className="h-[452px] w-[524px] pt-4">
+    <div className="pt-4 lg:h-[452px] lg:w-[524px]">
       <Form
         name="basic"
         onFinish={onFinish}

@@ -26,7 +26,7 @@ function App() {
               <Route index element={<NotFoundJob />} />
               <Route path="/job-list" element={<JobList />} />
             </Route>
-            <Route path="/info-register" element={<InfoRegister />} />
+            <Route path="/info-register/:role" element={<InfoRegister />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/test" element={<Examination />} />
               <Route path="/test/:subj" element={<Test />} />

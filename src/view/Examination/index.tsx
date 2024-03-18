@@ -1,6 +1,6 @@
-import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
 import { Button, Form, Select } from "antd";
-import { useState } from "react";
+
 import styles from "./examStyle.module.css";
 import { useAppDispatch } from "../../core/redux/hooks";
 import { onSetSubject } from "../../core/redux/features/exam/examSlice";
@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import Hello from "../../shared/components/Hello";
 
 const Examination = () => {
-  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -25,7 +23,7 @@ const Examination = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center px-4 sm:px-0">
       <Hello />
 
       <Form
@@ -33,26 +31,19 @@ const Examination = () => {
         onFinish={onFinish}
         autoComplete="off"
         layout="inline"
-        className="mt-4 w-[852px] justify-between rounded-xl bg-white p-1"
-        style={{ color: "red" }}
+        className="mt-4 w-full justify-between rounded-xl bg-white p-1 md:w-[600px] lg:w-[852px]"
       >
         <Form.Item<FieldType>
           name="select"
           rules={[{ required: true, message: "" }]}
-          className="w-[85%] font-semibold"
+          className="!flex-1 font-semibold"
         >
           <Select
             suffixIcon={
-              isSelectOpen ? (
-                <CaretUpOutlined className="rotate-down-animation text-[16px] text-orange-alta" />
-              ) : (
-                <CaretDownOutlined className="rotate-down-animation text-[16px] text-orange-alta" />
-              )
+              <CaretDownOutlined className="rotate-down-animation text-[16px] text-orange-alta" />
             }
             placeholder="Chọn môn thi"
             className="h-[48px] w-full pr-1 text-[14px] font-normal "
-            onDropdownVisibleChange={() => setIsSelectOpen(true)}
-            onBlur={() => setIsSelectOpen(false)}
             dropdownStyle={{ padding: "10px, 16px, 10px, 16px" }}
           >
             <Select.Option
@@ -74,14 +65,14 @@ const Examination = () => {
               VFX Artist
             </Select.Option>
             <Select.Option
-              value="UI/UX Design"
+              value="UI|UX Design"
               className={`${styles.selectOption}`}
             >
               UI/UX Design
             </Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item className="w-[15%]">
+        <Form.Item className="">
           <Button
             htmlType="submit"
             type="primary"

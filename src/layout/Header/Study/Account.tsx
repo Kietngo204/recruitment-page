@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, MenuProps, Space } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../core/redux/hooks";
 import { logout } from "../../../core/redux/actions/userActionThunk";
 import { auth } from "../../../firebase/firebase";
@@ -10,11 +10,42 @@ const Account: React.FC = () => {
   const displayName = currentUser?.displayName;
   const photoURL = currentUser?.photoURL;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const items: MenuProps["items"] = [
     {
       label: <Link to="profile">Profile</Link>,
       key: "0",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: (
+        <div
+          onClick={() => {
+            navigate("/info-register/student");
+          }}
+        >
+          Đăng kí trực tuyến
+        </div>
+      ),
+      key: "1",
+    },
+    {
+      type: "divider",
+    },
+    {
+      label: (
+        <div
+          onClick={() => {
+            navigate("/info-register/enterprise");
+          }}
+        >
+          Doanh nghiệp đăng kí
+        </div>
+      ),
+      key: "2",
     },
     {
       type: "divider",
@@ -30,14 +61,14 @@ const Account: React.FC = () => {
           Đăng xuất
         </Link>
       ),
-      key: "1",
+      key: "3",
     },
   ];
   return (
     <Dropdown menu={{ items }} trigger={["click"]}>
       <Button
         type="primary"
-        className="  h-full bg-orange-alta px-8 py-2"
+        className="h-full bg-orange-alta xl:px-8 xl:py-2"
         onClick={(e) => e.preventDefault()}
       >
         <Space>

@@ -43,7 +43,7 @@ const Question: React.FC<any> = ({ questions }) => {
 
   return (
     <>
-      <div className="w-[633px] pt-6">
+      <div className="w-full pt-6 md:w-[633px]">
         {/* Hiển thị nội dung của câu hỏi dựa trên currentQuestion */}
         <div>
           <div className="">

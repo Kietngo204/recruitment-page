@@ -50,10 +50,10 @@ const JobItem: React.FC<JopItemType> = ({ company, img }) => {
           nghiệm ReactJS, Typescript
         </h4>
         <div className="flex items-center justify-around border-t border-dashed border-[#B6B6B6] pt-3 text-center text-[14px] text-[#6D6D6D]">
-          <p className="w-full border-r border-[#B6B6B6]">
+          <p className="flex w-full items-center justify-center border-r border-[#B6B6B6] pr-3 sm:pr-0">
             <MailOutlined /> tuyendung@alta.com.vn
           </p>
-          <p className="w-full">
+          <p className="w-full pl-3 sm:pl-0">
             <PhoneOutlined rotate={90} /> 0282 240 9960
           </p>
         </div>

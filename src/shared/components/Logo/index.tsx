@@ -17,7 +17,7 @@ const Logo: React.FC<LogoProps> = (props) => {
 
   return (
     <div
-      className={`h-[52px] w-[373px] ${absolute} ${top} ${left} ${right} ${bottom}`}
+      className={` xxl:h-[52px] xxl:w-[373px] h-[30px] w-[221px] sm:h-[41px] sm:w-[300px] ${absolute} ${top} ${left} ${right} ${bottom}`}
     >
       <Link to={"/"}>
         <Image src={images?.logo} alt="logo" preview={false} />

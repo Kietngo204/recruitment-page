@@ -3,7 +3,7 @@ import FormReportProcess from "./FormReportProcess";
 
 const ReportProcess = () => {
   return (
-    <div className="ml-[153px]">
+    <div className="px-4 lg:ml-[153px] lg:px-0">
       <Hello />
       <FormReportProcess />
     </div>

@@ -8,13 +8,13 @@ import { useAppDispatch, useAppSelector } from "../../core/redux/hooks";
 import { getImages } from "../../core/redux/actions/imagesActionThunk";
 import ModalApply from "../../shared/components/ModalApply";
 import Loading from "../../shared/components/Loading";
+import RightMenu from "../RightMenu";
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
 
   const { images } = useAppSelector((state) => state.images);
 
-  console.log("images:", images);
   useEffect(() => {
     dispatch(getImages());
   }, []);
@@ -23,20 +23,20 @@ const MainLayout = () => {
     return <Loading fullscreen={true} />;
   }
   return (
-    <div>
+    <>
       <Header />
 
-      <ConfigProvider theme={homeTheme}>
-        <div className="h-[100dvh] pt-[52px]">
+      <main className="pt-[52px]">
+        <ConfigProvider theme={homeTheme}>
           <div className="container mx-auto">
             <Outlet />
           </div>
-        </div>
-      </ConfigProvider>
-
+        </ConfigProvider>
+      </main>
       <ModalApply />
+      <RightMenu />
       <Footer />
-    </div>
+    </>
   );
 };
 

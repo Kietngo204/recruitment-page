@@ -3,12 +3,12 @@ import { CurrentPathProps } from "../Study/StudyTypes";
 
 const OnlineRegistration: React.FC<CurrentPathProps> = ({ currentPath }) => {
   const navigate = useNavigate();
-  const isOnRegisActive = currentPath?.startsWith("/info-register");
+  const isOnRegisActive = currentPath?.startsWith("/info-register/student");
   return (
     <div
       className="flex h-[40px] cursor-pointer  items-center justify-between"
       onClick={() => {
-        navigate("/info-register");
+        navigate("/info-register/student");
       }}
     >
       <svg

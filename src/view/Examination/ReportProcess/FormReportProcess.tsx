@@ -29,7 +29,7 @@ const FormReportProcess = () => {
       onFinish={onFinish}
       autoComplete="off"
       layout="vertical"
-      className="mt-4 w-[524px] justify-between rounded-xl p-1"
+      className="mt-4 justify-between rounded-xl p-1 lg:w-[524px]"
       style={{ color: "red" }}
     >
       <Form.Item<FieldType>

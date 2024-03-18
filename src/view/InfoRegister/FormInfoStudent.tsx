@@ -3,8 +3,11 @@ import { Form, Upload, Input, FormProps, Select } from "antd";
 import ButtonSend from "../../shared/components/ButtonSend";
 import CustomDatePicker from "../../shared/components/CustomDatePicker";
 import dayjs from "dayjs";
+import { useAppDispatch } from "../../core/redux/hooks";
+import { setOpenModalApply } from "../../core/redux/features/modalApply/modalApplySlice";
 
-const FormInfoRegister = () => {
+const FormInfoStudent = () => {
+  const dispatch = useAppDispatch();
   type FieldType = {
     file?: any;
     username?: string;
@@ -23,6 +26,7 @@ const FormInfoRegister = () => {
     console.log("Success:", values);
     console.log("File:", values?.file?.fileList);
     console.log("Date:", dayjs(values.dateOfBirth).format("DD-MM-YYYY"));
+    dispatch(setOpenModalApply());
   };
 
   const normFile = (e: any) => {
@@ -37,7 +41,7 @@ const FormInfoRegister = () => {
     <Form
       layout="vertical"
       onFinish={onFinish}
-      className="mt-4 grid grid-cols-2 gap-x-12 gap-y-3"
+      className="mt-4 lg:grid lg:grid-cols-2 lg:gap-x-12 lg:gap-y-3"
       autoComplete="off"
     >
       <Form.Item<FieldType>
@@ -51,7 +55,7 @@ const FormInfoRegister = () => {
         ]}
         valuePropName="fileList"
         getValueFromEvent={normFile}
-        className="col-span-2  text-base font-semibold"
+        className="text-base  font-semibold lg:col-span-2"
       >
         <Upload
           action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
@@ -251,7 +255,7 @@ const FormInfoRegister = () => {
           <Select.Option value="Đà Nẵng">Đà Nẵng</Select.Option>
         </Select>
       </Form.Item>
-      <p className="col-span-2 mb-3 mt-[-12px] flex items-center before:me-[4px] before:inline-block before:font-['SimSun'] before:font-semibold before:text-[#ff4d4f] before:content-['*']">
+      <p className="mb-3 flex items-center before:me-[4px] before:inline-block before:font-['SimSun'] before:font-semibold before:text-[#ff4d4f] before:content-['*'] lg:col-span-2 lg:mt-[-12px]">
         là những trường hợp bắt buộc
       </p>
       <Form.Item>
@@ -261,4 +265,4 @@ const FormInfoRegister = () => {
   );
 };
 
-export default FormInfoRegister;
+export default FormInfoStudent;

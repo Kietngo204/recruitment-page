@@ -4,7 +4,7 @@ interface ModalApplyState {
   openApply: boolean;
 }
 
-const initialState = {
+const initialState: ModalApplyState = {
   openApply: false,
 };
 

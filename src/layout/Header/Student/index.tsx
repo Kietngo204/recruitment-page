@@ -3,11 +3,11 @@ import SeeJD from "./SeeJD";
 import OnlineRegistration from "./OnlineRegistration";
 import Option from "../../../shared/components/Option";
 
-const Requirement = () => {
+const Student = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   return (
-    <div className="flex items-center justify-center gap-8">
+    <div className="flex flex-col items-start justify-center gap-8 xl:flex-row xl:items-center">
       <SeeJD currentPath={currentPath} />
       <OnlineRegistration currentPath={currentPath} />
       <Option />
@@ -15,4 +15,4 @@ const Requirement = () => {
   );
 };
 
-export default Requirement;
+export default Student;

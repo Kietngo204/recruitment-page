@@ -6,7 +6,7 @@ const LearnProcess: React.FC<CurrentPathProps> = ({ currentPath }) => {
   const isLearnProcessActive = currentPath?.startsWith("/learnProcess");
   return (
     <div
-      className="flex cursor-pointer items-center justify-between px-6"
+      className="flex cursor-pointer items-center justify-between"
       onClick={() => {
         navigate("learnProcess");
       }}

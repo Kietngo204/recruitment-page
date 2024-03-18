@@ -27,11 +27,11 @@ const Test = () => {
   }
 
   return (
-    <div className="flex justify-center">
-      <div className="flex w-[1290px] flex-col justify-center">
+    <div className="flex justify-center px-4 lg:px-0">
+      <div className="flex flex-col justify-center lg:w-[1290px]">
         <div>
           <h4 className="text-xl font-semibold">Đề thi môn</h4>
-          <h2 className="text-[32px] font-bold">{subj}</h2>
+          <h2 className="text-[24px] font-bold md:text-[32px]">{subj}</h2>
         </div>
         <ExamInfo />
 

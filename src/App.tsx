@@ -15,6 +15,7 @@ import ProtectedRoute from "./routers/ProtectedRoute";
 import InfoRegister from "./view/InfoRegister";
 import NotFoundJob from "./view/Home/NotFoundJob";
 import JobList from "./view/JobList";
+import Register from "./view/Auth/Register";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           </Route>
           <Route path="/auth/*" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
             <Route path="reset-password" element={<ResetPassword />} />
           </Route>

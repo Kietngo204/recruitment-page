@@ -1,18 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getQuestion } from "../../actions/examActionThunk";
 
+export interface QuestionType {
+  question: string;
+  options: string[];
+}
+
 interface ExamProps {
   subject: string;
-  questions: any;
+  questions: QuestionType[] | [];
   isLoading: boolean;
   error: string | null;
+  openSubmitTest: boolean;
 }
 
 const initialState: ExamProps = {
   subject: "",
-  questions: null,
+  questions: [],
   isLoading: false,
   error: null,
+  openSubmitTest: false,
 };
 
 export const examSlice = createSlice({
@@ -22,8 +29,11 @@ export const examSlice = createSlice({
     onSetSubject: (state, action) => {
       state.subject = action.payload;
     },
-    onRemoveSubject: (state) => {
-      state.subject = "";
+    onOpenModalSubmitTest: (state) => {
+      state.openSubmitTest = true;
+    },
+    onCloseModalSubmitTest: (state) => {
+      state.openSubmitTest = false;
     },
   },
   extraReducers(builder) {
@@ -38,13 +48,14 @@ export const examSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getQuestion.rejected, (state, action: any) => {
-        state.error = action.error?.message ?? "getQuestion error";
+        state.error = action.error?.code ?? "getQuestion error";
         state.questions = [];
         state.isLoading = false;
       });
   },
 });
 
-export const { onSetSubject } = examSlice.actions;
+export const { onSetSubject, onCloseModalSubmitTest, onOpenModalSubmitTest } =
+  examSlice.actions;
 
 export default examSlice.reducer;

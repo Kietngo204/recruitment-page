@@ -1,17 +1,19 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../core/redux/hooks";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
 import { showModal } from "../../../core/redux/features/modalSuccess/modalSuccessSlice";
+import { confirmThePasswordReset } from "../../../core/redux/actions/userActionThunk";
 
 const FormResetPassword = () => {
+  const { error } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const [notConfirm, setNotConfirm] = useState<boolean>(false);
-
+  let oobCode: string | null = searchParams.get("oobCode");
   const onFinish = (values: any) => {
-    console.log("Success:", values);
     const { password, confirmPassword } = values;
     if (password !== confirmPassword) {
       setNotConfirm(true);
@@ -19,18 +21,26 @@ const FormResetPassword = () => {
     }
 
     setNotConfirm(false);
-    console.log("Gửi yêu cầu đặt lại mật khẩu với mật khẩu mới:", password);
-    // Gửi yêu cầu đặt lại mật khẩu tới server ở đây
 
-    dispatch(
-      showModal({
-        title: "Tạo mật khẩu thành công",
-        button: "Đăng nhập ngay",
-        titleSecond:
-          "Đăng nhập ngay để bắt đầu<br/> nhận được các cơ hội sự nghiệp lý tưởng",
-        navigate: "/auth/login",
-      }),
-    );
+    if (oobCode) {
+      // Dispatch the action with oobCode and confirmPassword
+      dispatch(
+        confirmThePasswordReset({ oobCode, newPassword: confirmPassword }),
+      );
+      dispatch(
+        showModal({
+          title: "Tạo mật khẩu thành công",
+          button: "Đăng nhập ngay",
+          titleSecond:
+            "Đăng nhập ngay để bắt đầu<br/> nhận được các cơ hội sự nghiệp lý tưởng",
+          navigate: "/auth/login",
+        }),
+      );
+    } else {
+      // Handle the case where oobCode is null
+      console.error("oobCode is null");
+      // You might want to show an error message to the user or take other actions.
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -102,6 +112,11 @@ const FormResetPassword = () => {
           Xác nhận
         </Button>
       </Form.Item>
+      {!!error && (
+        <p className="font-medium text-red-alta">
+          Đã xảy ra lỗi vui lòng thử lại!
+        </p>
+      )}
       <div className="flex justify-end pt-3">
         <Typography.Text
           onClick={() => {

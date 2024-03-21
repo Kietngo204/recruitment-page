@@ -33,7 +33,7 @@ const ModalSuccess = () => {
       centered
     >
       <div className="flex flex-col items-center justify-center gap-6 px-16 py-10">
-        <h3 className="text-[24px] font-bold leading-[28.13px] text-orange-alta">
+        <h3 className="text-center text-[24px] font-bold leading-[28.13px] text-orange-alta">
           {title}
         </h3>
         <p

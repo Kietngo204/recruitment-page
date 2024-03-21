@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
 import { getJobs } from "../../../core/redux/actions/jobsActionThunk";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { setOpenModalFilter } from "../../../core/redux/features/modalFilter/modalFilterSlice";
 
 const SearchJob = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ const SearchJob = () => {
           layout="inline"
           className="h-[44px] w-full items-center  rounded-lg bg-white p-[6px] lg:mt-4 lg:h-[60px] lg:w-[900px] xl:w-[1290px]"
         >
-          <div className=" xxl:w-[1135px] flex-1 lg:grid lg:grid-cols-3">
+          <div className=" flex-1 lg:grid lg:grid-cols-3 xxl:w-[1135px]">
             <Form.Item<FieldType>
               name="search"
               noStyle={true}
@@ -153,7 +154,7 @@ const SearchJob = () => {
             type="primary"
             className="flex h-full w-full items-center bg-orange-alta font-semibold text-white"
             onClick={() => {
-              dispatch(getJobs());
+              dispatch(setOpenModalFilter());
             }}
           >
             Lọc <SlidersOutlined className="text-[20px]" />

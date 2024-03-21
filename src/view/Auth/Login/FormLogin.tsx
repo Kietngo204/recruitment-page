@@ -25,6 +25,7 @@ const FormLogin = () => {
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
 
   const { error } = useAppSelector((state) => state.user);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -158,14 +159,25 @@ const FormLogin = () => {
             <Checkbox>Ghi nhớ mật khẩu</Checkbox>
           </Form.Item>
 
-          <Typography.Text
-            className="cursor-pointer text-orange-alta underline"
-            onClick={() => {
-              navigate("/auth/forgot-password");
-            }}
-          >
-            Quên mật khẩu?
-          </Typography.Text>
+          <div className="flex gap-3">
+            <Typography.Text
+              className="cursor-pointer text-orange-alta underline"
+              onClick={() => {
+                navigate("/auth/register");
+              }}
+            >
+              Chưa có tài khoản?
+            </Typography.Text>
+            <span className="text-orange-alta">|</span>
+            <Typography.Text
+              className="cursor-pointer text-orange-alta underline"
+              onClick={() => {
+                navigate("/auth/forgot-password");
+              }}
+            >
+              Quên mật khẩu?
+            </Typography.Text>
+          </div>
         </div>
 
         <ReCAPTCHA
@@ -177,6 +189,7 @@ const FormLogin = () => {
               setIsRecaptcha(false);
             }
           }}
+          size="normal"
         />
 
         <Form.Item>

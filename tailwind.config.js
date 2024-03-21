@@ -14,6 +14,7 @@ export default {
       },
       fontFamily: {
         body: ['"Open Sans"'],
+        roboto: ['"Roboto"'],
       },
     },
     screens: {

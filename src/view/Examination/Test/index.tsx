@@ -5,6 +5,7 @@ import Question from "./Question";
 import { useEffect } from "react";
 import { getQuestion } from "../../../core/redux/actions/examActionThunk";
 import Loading from "../../../shared/components/Loading";
+import ModalSubmitTest from "./ModalSubmitTest";
 
 const Test = () => {
   const { subj } = useParams();
@@ -33,10 +34,11 @@ const Test = () => {
           <h4 className="text-xl font-semibold">Đề thi môn</h4>
           <h2 className="text-[24px] font-bold md:text-[32px]">{subj}</h2>
         </div>
-        <ExamInfo />
+        <ExamInfo questions={questions} />
 
-        <Question questions={questions} />
+        {questions && <Question questions={questions} />}
       </div>
+      <ModalSubmitTest />
     </div>
   );
 };

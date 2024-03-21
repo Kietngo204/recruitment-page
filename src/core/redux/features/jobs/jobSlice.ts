@@ -30,7 +30,7 @@ export const jobsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getJobs.rejected, (state, action: any) => {
-        state.error = action.error?.message ?? "getIJobs error";
+        state.error = action.error?.code ?? "getIJobs error";
         state.jobs = null;
         state.isLoading = false;
       });

@@ -30,7 +30,7 @@ export const imagesSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getImages.rejected, (state, action: any) => {
-        state.error = action.error?.message ?? "getImages error";
+        state.error = action.error?.code ?? "getImages error";
         state.images = null;
         state.isLoading = false;
       });

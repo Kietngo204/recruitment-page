@@ -9,10 +9,12 @@ import { getImages } from "../../core/redux/actions/imagesActionThunk";
 import ModalApply from "../../shared/components/ModalApply";
 import Loading from "../../shared/components/Loading";
 import RightMenu from "../RightMenu";
+import ModalFilter from "../../shared/components/ModalFilter";
+import { auth } from "../../firebase/firebase";
 
 const MainLayout = () => {
   const dispatch = useAppDispatch();
-
+  console.log(auth.currentUser);
   const { images } = useAppSelector((state) => state.images);
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const MainLayout = () => {
       </main>
       <ModalApply />
       <RightMenu />
+      <ModalFilter />
       <Footer />
     </>
   );

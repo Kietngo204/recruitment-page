@@ -1,24 +1,18 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../firebase/firebase";
-import { sendPasswordResetEmail } from "firebase/auth";
+import { useAppDispatch, useAppSelector } from "../../../core/redux/hooks";
+import { passwordReset } from "../../../core/redux/actions/userActionThunk";
 
 const FormForgotPassword = () => {
+  const { error, emailMessage } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const onFinish = (values: any) => {
     // Nếu người dùng đã đăng nhập, gửi email xác thực
-    sendPasswordResetEmail(auth, values.email)
-      .then(() => {
-        console.log("Email reset password sent!");
-        navigate("/auth/reset-password");
-      })
-      .catch((error) => {
-        // Xử lý lỗi nếu có
-        console.error("Error sending email  reset password:", error);
-      });
+    dispatch(passwordReset(values.email));
   };
   // Confirm the link is a sign-in with email link.
-
+  console.log(error);
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -63,6 +57,11 @@ const FormForgotPassword = () => {
           Xác nhận
         </Button>
       </Form.Item>
+      {!!emailMessage && (
+        <p className="font-medium text-red-alta">
+          Đã gửi một email xác thực. Vui lòng kiểm tra hòm thư đến của bạn.
+        </p>
+      )}
 
       <div className="flex justify-end pt-3">
         <Typography.Text

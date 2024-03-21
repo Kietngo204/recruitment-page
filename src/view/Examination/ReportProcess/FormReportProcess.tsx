@@ -1,9 +1,5 @@
-import {
-  CaretDownOutlined,
-  CaretUpOutlined,
-  SendOutlined,
-} from "@ant-design/icons";
-import { Button, Form, Input, Select } from "antd";
+import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
+import { Form, Input, Select } from "antd";
 import { useState } from "react";
 import styles from "../examStyle.module.css";
 import TextArea from "antd/es/input/TextArea";

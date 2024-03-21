@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CurrentPathProps } from "../Study/StudyTypes";
 import { useAppDispatch } from "../../../core/redux/hooks";
 import { getJobs } from "../../../core/redux/actions/jobsActionThunk";

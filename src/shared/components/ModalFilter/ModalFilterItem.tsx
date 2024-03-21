@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 interface ModalFilterItemProps {
   company: string;
   id: number;
